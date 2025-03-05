@@ -3,26 +3,23 @@ const express = require("express");
 // create an extance of express
 const app = express();
 
+// user routes middleware file
+const userRoutes = require("./routes/userRoute");
+
+// user routes middleware
+app.use("/api/users", userRoutes);
+
+// question routes middleware ?
+
+// answer routes middleware ?
+
+
+
 // Route to check if the server is running
 app.get("/", (req, res) => res.send("Up and running!"));
 
 const PORT = 3000;
 
-// register Routes
-app.post("/api/users/register", (req, res) => {
-  res.send("user registered");
-});
-
-// login Routes
-app.post("/api/users/login", (req, res) => {
-  res.send("user loggedin");
-});
-
-
-// check user Routes
-app.get("/api/users/check", (req, res) => {
-  res.send("user checked");
-});
 
 
 // Listen to the server
