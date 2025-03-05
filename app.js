@@ -13,18 +13,14 @@ app.use("/api/users", userRoutes);
 
 // answer routes middleware ?
 
-
-
-// Route to check if the server is running
+// route to check if the server is running
 app.get("/", (req, res) => res.send("Up and running!"));
 
 const PORT = 3000;
-
-
 
 // Listen to the server
 if (app.listen(PORT)) {
   console.log(`Server is running on port http://localhost:${PORT}`);
 } else {
-    console.log("Server is not running!");
-    }
+  console.log("Server is not running!");
+}

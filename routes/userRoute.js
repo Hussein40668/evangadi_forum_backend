@@ -1,19 +1,17 @@
 const express = require("express");
+const { register } = require("../controller/userController");
 const router = express.Router();
 
+// user controller
+const { login, checkUser } = require("../controller/userController");
+
 // register Routes
-router.post("/register", (req, res) => {
-  res.send("user registered");
-});
+router.post("/register", register)
 
 // login Routes
-router.post("/login", (req, res) => {
-  res.send("user loggedin");
-});
+router.post("/login", login)
 
 // check user Routes
-router.get("/check", (req, res) => {
-  res.send("user checked");
-});
+router.get("/check", checkUser)
 
 module.exports = router;
