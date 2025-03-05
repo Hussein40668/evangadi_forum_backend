@@ -1,24 +1,16 @@
 // core modules to be imported
 const mysql2 = require("mysql2");
-const express = require("express");
-
-// create an extance of express
-const app = express();
-
- // Route to check Homepage
-app.get("/", (req, res) => res.send("Up and running!"));
- 
 
 // Create a connection pool to the database
 const dbconnection = mysql2.createPool({
   host: "localhost",
-  user: "Hussein_Md", 
+  user: "Hussein_Md",
   password: "123456",
   database: "evangadi_forum",
   connectionLimit: 10,
 });
 
- //  check connected to the MySQL database
+//  check connected to the MySQL database
 dbconnection.getConnection((err) => {
   if (err) {
     console.log(err.message);
@@ -72,4 +64,4 @@ const createTables = async () => {
   }
 };
 // Run the function to create tables
- createTables();
+createTables();
