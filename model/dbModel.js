@@ -10,13 +10,16 @@ const dbconnection = mysql2.createPool({
   connectionLimit: 10,
 });
 
-//  check connected to the MySQL database
-dbconnection.getConnection((err) => {
-  if (err) {
-    console.log(err.message);
-    return err;
-  } else console.log("Connected to the mysql server!");
-});
+// Check MySQL database connection
+const start = async () => {
+  try {
+    await dbconnection.promise().query("SELECT 1");
+    console.log("Connected to the MySQL server!");
+  } catch (error) {
+    console.log("Error connecting to the MySQL server:", error.message);
+  }
+};
+start();
 
 // Function to create tables one by one
 const createTables = async () => {
@@ -65,3 +68,5 @@ const createTables = async () => {
 };
 // Run the function to create tables
 createTables();
+
+module.exports = dbconnection.promise();

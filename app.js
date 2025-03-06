@@ -3,11 +3,20 @@ const express = require("express");
 // create an extance of express
 const app = express();
 
-// user routes middleware file
+// db connection
+const dbConnection = require("./model/dbModel");
+
+//routes middleware file
 const userRoutes = require("./routes/userRoute");
+const questionRoutes = require("./routes/questionRoute");
+const answerRoutes = require("./routes/answerRoute");
+
+// middleware to parse json data
+app.use(express.json());
 
 // user routes middleware
 app.use("/api/users", userRoutes);
+
 
 // question routes middleware ?
 
