@@ -4,6 +4,9 @@ const express = require("express");
 // create an extance of express
 const app = express();
 
+const cors = require("cors");
+app.use(cors());
+
 // db connection
 const dbConnection = require("./model/dbModel");
 
