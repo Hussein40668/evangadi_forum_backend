@@ -6,10 +6,13 @@ const app = express();
 // db connection
 const dbConnection = require("./model/dbModel");
 
+//authentication middleware
+const authMiddleware = require("./middleware/authMiddleware");
 //routes middleware file
 const userRoutes = require("./routes/userRoute");
 const questionRoutes = require("./routes/questionRoute");
 const answerRoutes = require("./routes/answerRoute");
+
 
 // middleware to parse json data
 app.use(express.json());
@@ -17,8 +20,8 @@ app.use(express.json());
 // user routes middleware
 app.use("/api/users", userRoutes);
 
-
 // question routes middleware ?
+app.use("/api/questions",authMiddleware,questionRoutes);
 
 // answer routes middleware ?
 

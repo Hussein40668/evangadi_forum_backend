@@ -65,21 +65,9 @@ const login = async (req, res) => {
     const username = user[0].username;
     const userid = user[0].userid;
     
-    const token = jwt.sign({username,  userid }, "secret", { expiresIn: "1d" });
-    
+    const token = jwt.sign({username,  userid }, "secret", { expiresIn: "1d" }); 
      return res.status(StatusCodes.OK).json({msg:"user registerd succesfully", token });
     
-    // const payload = {
-    //   user: {
-    //     id: user[0].userid,
-    //   },
-    // };
-
-    // jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" }, (err, token) => {
-    //   if (err) throw err;
-    //   res.status(StatusCodes.OK).json({ token });
-    // });
-    res.status(StatusCodes.OK).json({msg:"user logged in successfully"});
   } catch (error) {
     console.log(error.message);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({msg:"something went wrong,try again later!"});
@@ -87,7 +75,9 @@ const login = async (req, res) => {
 };
 
 const checkUser = (req, res) => {
-  res.send("user checked");
+  const { username, userid } = req.user;
+  res.status(StatusCodes.OK).json({msg:"checked user",username,userid});
+ 
 };
 
 module.exports = { register, login, checkUser };
