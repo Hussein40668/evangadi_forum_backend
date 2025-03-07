@@ -1,7 +1,7 @@
 const dbConnection = require("../model/dbModel");
 const bycrypt = require("bcrypt");
  const { StatusCodes } = require('http-status-codes');
-//const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { username, firstname, lastname, email, password } = req.body;
@@ -61,7 +61,13 @@ const login = async (req, res) => {
     const isMatch = await bycrypt.compare(password, user[0].password);
     if (!isMatch) { return res.status(StatusCodes.BAD_REQUEST).json({ msg: "invalid credentials" });
     }
-    // return res.json({user});
+
+    const username = user[0].username;
+    const userid = user[0].userid;
+    
+    const token = jwt.sign({username,  userid }, "secret", { expiresIn: "1d" });
+    
+     return res.status(StatusCodes.OK).json({msg:"user registerd succesfully", token });
     
     // const payload = {
     //   user: {
